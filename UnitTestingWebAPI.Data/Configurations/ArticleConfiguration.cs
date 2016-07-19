@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using UnitTestingWebAPI.Domain;
 
 namespace UnitTestingWebAPI.Data.Configurations

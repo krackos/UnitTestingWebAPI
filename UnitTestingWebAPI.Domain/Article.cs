@@ -14,7 +14,6 @@ namespace UnitTestingWebAPI.Domain
 
         public int BlogID { get; set; }
         public virtual Blog Blog { get; set; }
-
-        //public Article() { }
+        
     }
 }
