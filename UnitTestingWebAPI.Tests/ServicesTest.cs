@@ -78,5 +78,46 @@ namespace UnitTestingWebAPI.Tests
             var articles = _articleService.GetArticles();
             Assert.That(articles, Is.EqualTo(_randomArticles));
         }
+       
+        [Test]
+        public void ServiceShouldReturnRightArticle() {
+          var wcfSecurtityArticle = _articleService.GetArticle(2);
+          
+          Assert.That(wcfSecurityArticle, 
+            Is.Equal(_randomArticles.Find(a => a.Title.Contains("Secure WCF services"))));
+        }
+        [Test]
+        public void ServiceShouldAddNewArticle()
+        {
+          var _newArticle = new Article() {
+            Author = "Chri Sakellarios",
+            Contents = "If you are an ASP.net MVC developer, you will certainly",
+            Title = "URL Rooting in ASP.NET (Web Forms)",
+            URL = "https://chsakell.com/"
+          };
+
+          int _maxArticleIDBeforeAdd = _randomArticles.Max(a => a.ID);
+          _articleService.CreateARticle(_newArticle);
+        
+          Assert.That(_newArticle, Is.EqualTo(_randomArticles.Last()));
+          Assert.That(_maxArticleIDBeforeAdd + 1, IsEqualTo(_randomArticles.Last().ID));
+        }
+        [Test]
+        public void ServiceShouldUpdateArticle()
+        {
+          var _firstArticle = _randomArticles.First();
+          _firstArticle.Title = "OData feat. ASP.NET Web API";
+          _firstArticle.URL = "http://t.co/fuIbNoc7Zh";
+          _articleService.UpdateArticle(_firstArticle);
+
+          Assert.That(_firstArticle.DateEdited, Is.Not.EqualTo(DateTime.MinValue));
+          Assert.That(_firstArticle.URL, Is.EqualTo("http://t.co/fuIbNoc7Zh"));
+          Assert.That(_firstArticle.ID, Is.EqualTo(1));
+        }
+        [Test]
+        public void ServiceShouldDeleteArticle()
+        {
+          int maxID = _randomArticles.Max
+        }
     }
 }
