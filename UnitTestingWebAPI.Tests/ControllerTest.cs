@@ -155,7 +155,7 @@ namespace UnitTestingWebAPI.Tests
             _articlesController.Configuration.MapHttpAttributeRoutes();
             _articlesController.Configuration.EnsureInitialized();
             _articlesController.RequestContext.RouteData = new HttpRouteData(
-                new httpRoute(), new HttpRouteValueDictionary {{"_articlesController", "Articles"}});
+                new HttpRoute(), new HttpRouteValueDictionary {{"_articlesController", "Articles"}});
             var result = _articlesController.PostArticle(article) as CreatedAtRouteNegotiatedContentResult<Article>;
 
             Assert.That(result.RouteName, Is.EqualTo("DefaultApi"));

@@ -3,8 +3,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Text;
+//using System.Threading.Tasks;
 using UnitTestingWebAPI.Data;
 using UnitTestingWebAPI.Data.Infrastructure;
 using UnitTestingWebAPI.Data.Repositories;
@@ -117,7 +117,11 @@ namespace UnitTestingWebAPI.Tests
         [Test]
         public void ServiceShouldDeleteArticle()
         {
-          int maxID = _randomArticles.Max
+          int maxID = _randomArticles.Max(a => a.ID);
+          var _lastArticle = _randomArticles.Last();
+
+          _articleService.DeleteArticle(_lastArticle);
+          Assert.That(maxID, Is.GreaterThan(_randomArticles.Max(a => a.ID)));
         }
     }
 }
